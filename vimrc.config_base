@@ -1,4 +1,9 @@
-set nobackup                    " do not keep a backup file
+if(has("win32") || has("win95") || has("win64") || has("win16"))
+    let g:vimrc_iswindows=1
+else
+    let g:vimrc_iswindows=0
+endif
+
 set novisualbell                " turn off visual bell
 set visualbell t_vb=            " turn off error beep/flash
 set showmode                    " display current modes
@@ -29,7 +34,24 @@ set nocompatible
 set t_Co=256
 " 显示行号
 set number
-set relativenumber
+
+" Vim 7.3以上版本才支持，7.3一下版本不支持 relativenumber
+" ##### 相对行号 行号变成相对，可以用 nj  nk   进行跳转 5j   5k 上下跳5行
+set relativenumber number
+au FocusLost * :set norelativenumber number
+au FocusGained * :set relativenumber
+" 插入模式下用绝对行号, 普通模式下用相对
+autocmd InsertEnter * :set norelativenumber number
+autocmd InsertLeave * :set relativenumber
+function! NumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber number
+    else
+        set relativenumber
+    endif
+endfunc
+nnoremap <silent> <C-n> :call NumberToggle()<cr>
+
 " 取消换行
 set nowrap
 " 按词换行
@@ -79,8 +101,6 @@ set encoding=utf-8
 " 自动判断编码时，依次尝试以下编码：
 set fileencodings=utf-8,ucs-bom,cp936,gb18030,
 set helplang=cn
-"set langmenu=zh_CN.UTF-8
-"set enc=2byte-gb18030
 " 这句只影响普通模式 (非图形界面) 下的 Vim。
 set termencoding=utf-8
 " Use Unix as the standard file type
@@ -90,8 +110,86 @@ set formatoptions+=m
 " 合并两行中文时，不在中间加空格
 set formatoptions+=B
 
+" 增强模式中的命令行自动完成操作
+set wildmenu
+" set wildignore=*.swp,*.bak,*.pyc,*.class,.svn,*.o,*.obj
+set wildignore=*.o,*~,*.pyc,*.class		" Ignore compiled files
+" 离开插入模式后自动关闭预览窗口
+" autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+" 打开文件后，定位到上次关闭时的位置
+" if this not work ,make sure .viminfo is writable for you
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+
 " 去掉搜索高亮
 noremap <silent><leader>/ :nohls<CR>
+
+" Identify invisible characters and don't show them by default
+set list listchars=eol:¬,tab:▸\ ,trail:.,
+
+" 显示当前行所在函数名信息
+fun! ShowFuncName()
+  let lnum = line(".")
+  let col = col(".")
+  echohl ModeMsg
+  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
+  echohl None
+  call search("\\%" . lnum . "l" . "\\%" . col . "c")
+endfun
+map f :call ShowFuncName() <CR>
+
+
+" 插件 nerdtree 显示关闭快捷键
+map <F3> <leader>n
+
+" ##### 分屏窗口移动 在vim的各个窗口间切换
+map <leader>j <C-W>j
+map <leader>k <C-W>k
+map <leader>h <C-W>h
+map <leader>l <C-W>l
+
+" 防止vim卡顿
+set re=1
+set ttyfast
+set lazyredraw
+
+" eidt my vimrc file
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+" sourcing mapping
+nnoremap <leader>sv :source $MYVIMRC<cr>
+" disabling the old keys *esc*
+inoremap <esc> <nop>
+
+iabbrev @@ hi@chinacode.io
+iabbrev ccopy Copyright 2019 CHINACODE.io, all rights reserved.
+
+
+"==========================================
+" Theme Settings  主题设置
+"==========================================
+" Set extra options when running in GUI mode
+if has("gui_running")
+set guifont=Monaco:h14
+if has("gui_gtk2")   "GTK2
+    set guifont=Monaco\ 12,Monospace\ 12
+endif
+set guioptions-=T
+set guioptions+=e
+set guioptions-=r
+set guioptions-=L
+set guitablabel=%M\ %t
+" 0: 永远不会
+" 1: 至少有两个标签页时才会
+" 2: 永远会
+set showtabline=2
+set linespace=4
+set noimd
+set t_Co=256
+endif
+" 具体的主题插件参考 .vimrc.bundles 文件
+" ##### theme主题
 
 "设置标记一列的背景颜色和数字一行颜色一致
 hi! link SignColumn   LineNr
@@ -118,32 +216,3 @@ highlight PmenuSel ctermbg=lightgrey ctermfg=black
 highlight Comment    ctermfg=245 guifg=#8a8a8a
 highlight NonText    ctermfg=240 guifg=#585858
 highlight SpecialKey ctermfg=240 guifg=#585858
-
-" Identify invisible characters and don't show them by default
-set list listchars=eol:¬,tab:▸\ ,trail:.,
-
-" 显示当前行所在函数名信息
-fun! ShowFuncName()
-  let lnum = line(".")
-  let col = col(".")
-  echohl ModeMsg
-  echo getline(search("^[^ \t#/]\\{2}.*[^:]\s*$", 'bW'))
-  echohl None
-  call search("\\%" . lnum . "l" . "\\%" . col . "c")
-endfun
-map f :call ShowFuncName() <CR>
-
-" 防止vim卡顿
-set re=1
-set ttyfast
-set lazyredraw
-
-" eidt my vimrc file
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-" sourcing mapping
-nnoremap <leader>sv :source $MYVIMRC<cr>
-" disabling the old keys *esc*
-inoremap <esc> <nop>
-
-iabbrev @@ hi@chinacode.io
-iabbrev ccopy Copyright 2019 CHINACODE.io, all rights reserved.

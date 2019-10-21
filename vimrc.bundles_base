@@ -17,6 +17,8 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'ctrlpvim/ctrlp.vim'
 " ##### 目录导航
 Bundle 'scrooloose/nerdtree'
+" 文件头增加 copyright
+Bundle 'nine2/vim-copyright'
 
 call vundle#end()            " required
 filetype plugin indent on    " required

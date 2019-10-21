@@ -57,3 +57,9 @@ let g:NERDTreeChDirMode=2
 noremap <silent> <Leader>nf :NERDTreeFind<cr>
 " autocmd vimenter *.go NERDTreeFind
 " 选中目录，按 ma 可以在目录中新建文件
+
+" 文件头增加 copyright
+let g:file_copyright_name = "Wythe Chao"
+let g:file_copyright_email = "hi@chinacode.io"
+" let g:file_copyright_auto_filetypes = ['sh', 'plx', 'pl', 'pm', 'py', 'python', 'h', 'hpp', 'c', 'cpp', 'java']
+map uh :CopyrightUpdate<cr>
