@@ -8,8 +8,15 @@ call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'ycm-core/YouCompleteMe'
-Plugin 'flazz/vim-colorschemes'
 Plugin 'yianwillis/vimcdoc'
+" ##### 快速去行尾空格
+Bundle 'bronson/vim-trailing-whitespace'
+" ###### 快速注释
+Bundle 'scrooloose/nerdcommenter'
+" ##### 文件搜索 change to https://github.com/ctrlpvim/ctrlp.vim
+Bundle 'ctrlpvim/ctrlp.vim'
+" ##### 目录导航
+Bundle 'scrooloose/nerdtree'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
