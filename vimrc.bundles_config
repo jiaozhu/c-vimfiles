@@ -2,6 +2,9 @@
 let g:extra_whitespace_ignored_filetypes = ['unite', 'mkd', 'diff', 'ctrlsf', 'git', 'qf']
 map <leader>, :FixWhitespace<cr>
 
+" ###### YouCompleteMe
+let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+
 " ###### nerdcommenter
 " <leader>cc 注释选中内容
 " <leader>cu 取消选中注释
