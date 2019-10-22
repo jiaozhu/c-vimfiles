@@ -16,6 +16,19 @@ let NERD_cpp_alt_style=1
 let NERD_c_alt_style=1
 let g:NERDSpaceDelims=1
 
+" a.vim
+nnoremap <silent> <F4> :A<CR>
+
+" tagbar
+"打开函数列表
+nmap tb :TagbarToggle<CR>
+"设置窗口宽度
+let g:tagbar_width=30
+"在右侧窗口中显示
+let g:tagbar_right=1
+"选择后自动关闭
+let g:tagbar_autoclose=1
+
 " ###### ctrlpvim
 let g:ctrlp_map = '<leader>f'
 let g:ctrlp_cmd = 'CtrlP'

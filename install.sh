@@ -14,7 +14,7 @@
 BASEDIR=$(pwd)
 # 基本配置目录
 VIM_CONFIG_PATH="$BASEDIR/config"
-VIM_TMP_PATH="$ROOT_PATH/.vim"
+VIM_TMP_PATH="$HOME/.vim"
 
 echo "Set up Vundle"
 git clone --dept=1 https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
@@ -26,8 +26,8 @@ echo " Step 1: add config to $BASHRC_FILE"
 TMP_ENV_FILE="vim-tmp-env-file"
 echo "export VIM_CONFIG_PATH=$VIM_CONFIG_PATH" >$TMP_ENV_FILE
 echo "export VIM_TMP_PATH=$VIM_TMP_PATH" >>$TMP_ENV_FILE
-[[ -f $HOME/.bashrc ]] && cat $TMP_ENV_FILE >> $HOME/.bashrc
-[[ -f $HOME/.zshrc ]] && cat $TMP_ENV_FILE >> $HOME/.zshrc
+[[ -f $HOME/.bashrc ]] && cat $TMP_ENV_FILE >> $HOME/.bashrc && source $HOME/.bashrc
+[[ -f $HOME/.zshrc ]] && cat $TMP_ENV_FILE >> $HOME/.zshrc && source $HOME/.zshrc
 rm $TMP_ENV_FILE
 
 echo " Step 2: setting up symlinks"

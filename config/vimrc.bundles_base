@@ -19,6 +19,13 @@ Bundle 'ctrlpvim/ctrlp.vim'
 Bundle 'scrooloose/nerdtree'
 " 文件头增加 copyright
 Bundle 'nine2/vim-copyright'
+" a.vim—— .c与.h跳转
+Bundle 'vim-scripts/a.vim'
+" Auto Pairs
+Bundle 'jiangmiao/auto-pairs'
+" majutsushi/tagbar
+Bundle 'majutsushi/tagbar'
+
 
 call vundle#end()            " required
 filetype plugin indent on    " required
