@@ -170,6 +170,9 @@ inoremap <C-e> <C-o>$
 " 插入模式下进入行开始
 inoremap <C-a> <C-o>0
 
+" compiling and running a c programming file.
+map <F8> :w <CR> :!gcc % -o %< && ./%< <CR>
+
 "==========================================
 " Theme Settings  主题设置
 "==========================================
