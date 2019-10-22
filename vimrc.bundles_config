@@ -39,24 +39,25 @@ let g:ctrlp_mruf_default_order = 1
 "    let g:ctrlp_use_caching = 0
 "  endif
 
-" ##### nerdtree
-" map <leader>n :NERDTreeToggle<CR>
-noremap <silent> <Leader>n :NERDTreeFind<cr>
-let NERDTreeHighlightCursorline=1
-let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.obj$', '\.o$', '\.so$', '\.egg$', '^\.git$', '^\.svn$', '^\.hg$' ]
-"close vim if the only window left open is a NERDTree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | end
-" s/v 分屏打开文件
-let g:NERDTreeMapOpenSplit = 's'
-let g:NERDTreeMapOpenVSplit = 'v'
-let g:NERDTreeMouseMode = 3
-let g:NERDTreeWinSize = 50
-let g:NERDTreeDirArrows=1
-let g:NERDTreeChDirMode=2
-"打开NERDTree,定位到当前文件
-noremap <silent> <Leader>nf :NERDTreeFind<cr>
-" autocmd vimenter *.go NERDTreeFind
-" 选中目录，按 ma 可以在目录中新建文件
+" 文件树设置 {{{
+" 关闭NERDTree快捷键
+map <leader>t :NERDTreeToggle<CR>
+""当NERDTree为剩下的唯一窗口时自动关闭
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+""修改树的显示图标
+let g:NERDTreeDirArrowExpandable = '►'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let NERDTreeAutoCenter=1
+" 显示行号
+let NERDTreeShowLineNumbers=0
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+" 设置宽度
+let NERDTreeWinSize=25
+" 在终端启动vim时，共享NERDTree
+let g:nerdtree_tabs_open_on_console_startup=1
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
 
 " 文件头增加 copyright
 let g:file_copyright_name = "Wythe Chao"
