@@ -162,7 +162,7 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 " disabling the old keys *esc*
 inoremap <esc> <nop>
 
-iabbrev @@ hi@chinacode.io
+iabbrev @@ hi@bug.js.cn
 iabbrev ccopy Copyright 2019 CHINACODE.io, all rights reserved.
 
 " 插入模式下进入行结尾
@@ -223,3 +223,5 @@ highlight PmenuSel ctermbg=lightgrey ctermfg=black
 highlight Comment    ctermfg=245 guifg=#8a8a8a
 highlight NonText    ctermfg=240 guifg=#585858
 highlight SpecialKey ctermfg=240 guifg=#585858
+
+colorscheme desert

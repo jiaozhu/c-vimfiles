@@ -3,7 +3,7 @@
 #   Copyright (C)2019 All rights reserved.
 #
 #   Author        : Wythe Chao
-#   Email         : hi@chinacode.io
+#   Email         : hi@bug.js.cn
 #   File Name     : install.sh
 #   Last Modified : 2019-10-22 10:12
 #   Describe      :

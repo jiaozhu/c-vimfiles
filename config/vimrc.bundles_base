@@ -25,6 +25,8 @@ Bundle 'vim-scripts/a.vim'
 Bundle 'jiangmiao/auto-pairs'
 " majutsushi/tagbar
 Bundle 'majutsushi/tagbar'
+" Solarized Colorscheme for Vim
+Bundle 'altercation/vim-colors-solarized'
 
 
 call vundle#end()            " required
